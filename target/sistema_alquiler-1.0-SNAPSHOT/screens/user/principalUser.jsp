@@ -1,6 +1,6 @@
 <%-- 
-    Document   : principal
-    Created on : 5 nov. 2022, 16:26:47
+    Document   : principalUser
+    Created on : 6 nov. 2022, 18:14:57
     Author     : kjlme
 --%>
 
@@ -9,9 +9,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Página Principal - Administrador</title>
+        <title>Página Principal - Usuario</title>
     </head>
     <body>
-        <h1>Hola Admin!</h1>
+        <h1>Hola Usuario!</h1>
     </body>
 </html>

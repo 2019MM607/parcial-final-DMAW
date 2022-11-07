@@ -32,5 +32,40 @@ public class Connect {
         return check;
     }
     
+    public String getRol(String email) throws ClassNotFoundException, SQLException {
+        String response = "";
+        Connection conn = getConnection();
+        PreparedStatement ps = conn.prepareStatement("SELECT rol FROM usuario WHERE correo = '"+email+"'");
+        ResultSet rs=ps.executeQuery();
+        while(rs.next()) {
+            response += rs.getString("rol");
+        }
+        return response;
+    }
+    public String getAuto(String id) throws ClassNotFoundException, SQLException {
+        String response = "";
+        Connection conn = getConnection();
+        PreparedStatement ps = conn.prepareStatement("SELECT marca FROM auto WHERE id_auto = '"+id+"'");
+        ResultSet rs=ps.executeQuery();
+        while(rs.next()) {
+            response += rs.getString("marca");
+        }
+        return response;
+
+    }
+    public String getAlquiler() throws ClassNotFoundException, SQLException {
+        String response = "";
+        Connection conn = getConnection();
+        PreparedStatement ps = conn.prepareStatement("SELECT inicio, fin, id_auto FROM alquiler");
+        ResultSet rs=ps.executeQuery();
+        while(rs.next()) {
+            response+="<tr><td class='px-3 py-2 border-b border-gray-300 shadow-md text-center'><input type=checkbox name='eliminar' value='"+rs.getString("id_alquiler")+"' title='"+rs.getString("id_alquiler")+"'></td>";
+            response+="<td class='px-3 py-2 border-b border-gray-300 shadow-md text-center'>"+rs.getString("inicio")+"</td>";
+            response+="<td class='px-3 py-2 border-b border-gray-300 shadow-md text-center'>"+rs.getString("fin")+"</td>";
+            response+=getAuto(rs.getString("id_auto"));
+        }
+        return response;
+    }
+    
 
 }

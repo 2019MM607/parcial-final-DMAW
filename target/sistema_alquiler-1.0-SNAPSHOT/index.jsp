@@ -13,12 +13,18 @@
         String password = request.getParameter("password");
         boolean isLogged = connection.checkLogin(email, password);
         if(isLogged) {
-             request.getRequestDispatcher("/screens/admin/principal.jsp").forward(request, response);
+            String rol = connection.getRol(email);
+            if(rol.equals("administrador")) {
+                request.getRequestDispatcher("/screens/admin/principalAdmin.jsp").forward(request, response);
+            } else {
+                request.getRequestDispatcher("/screens/user/principalUser.jsp").forward(request, response);
+            }
+            
         } else {
             message = 
             "<div class='bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded'>" +
             "<strong class='font-bold'>Error!</strong>" +
-            "<span class='ml-2'>Datos Incorrectos.</span>" +
+            "<span class='ml-2'>Correo o Contraseña Incorrecta</span>" +
             "</div>" 
             ;
         }
