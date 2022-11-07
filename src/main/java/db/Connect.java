@@ -31,6 +31,4 @@ public class Connect {
         }
         return check;
     }
-    
-
 }

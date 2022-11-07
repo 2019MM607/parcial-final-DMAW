@@ -4,32 +4,32 @@
     Author     : reyna
 --%>
 
-<%@page import="db.Connect"%>
-<%!String message = "";%>
+<%--<%@page import="db.Connect"%>--%>
 <%
-    Connect connection = new Connect();
-    if(request.getParameter("login") != null) {
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        boolean isLogged = connection.checkLogin(email, password);
-        if(isLogged) {
-             request.getRequestDispatcher("/screens/admin/principal.jsp").forward(request, response);
-        } else {
-            message = 
-            "<div class='bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded'>" +
-            "<strong class='font-bold'>Error!</strong>" +
-            "<span class='ml-2'>Datos Incorrectos.</span>" +
-            "</div>" 
-            ;
-        }
-        
-    }
-
+//    Connect connection = new Connect();
+//    String message = "";
+//    
+//    if(request.getParameter("login") != null) {
+//        String email = request.getParameter("email");
+//        String password = request.getParameter("password");
+//        boolean isLogged = connection.checkLogin(email, password);
+//        if(isLogged) {
+//             request.getRequestDispatcher("/screens/admin/principal.jsp").forward(request, response);
+//        } else {
+//            message = 
+//            "<div class='bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded'>" +
+//            "<strong class='font-bold'>¡Error!</strong>" +
+//            "<span class='ml-2'>Datos Incorrectos.</span>" +
+//            "</div>" 
+//            ;          
+//        }   
+//    }
+    //message = "";
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
 <jsp:include page="/screens/templates/header.jsp" flush="true" />
-<script src="https://cdn.tailwindcss.com"></script>
 <body class="antialiased bg-gradient-to-br from-green-100 to-white">
     <div class="container px-6 mx-auto">
       <div
@@ -52,7 +52,7 @@
               ></path>
             </svg>
           </div>
-          <h1 class="text-5xl text-gray-800 font-bold">Nombre de la app</h1>
+          <h1 class="text-5xl text-gray-800 font-bold">ALQUILAUTOS</h1>
           <p class="w-5/12 mx-auto md:mx-0 text-gray-500">
             Alquila autos desde donde quieras, cuando quieras
           </p>
@@ -63,7 +63,7 @@
               Inicio de Sesión
             </h2>
             <!-- Inicio del Form -->  
-            <form action="" method="POST" class="w-full">
+            <form action="Controllers/validateUser.jsp" method="POST" class="w-full">
               <div id="input" class="flex flex-col w-full my-5">
                 <label for="username" class="text-gray-500 mb-2"
                   >Correo</label
@@ -73,6 +73,7 @@
                   id="username"
                   name="email"
                   placeholder="Ingresa tu usuario"
+                  required
                   class="appearance-none border-2 border-gray-100 rounded-lg px-4 py-3 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-green-600 focus:shadow-lg"
                 />
               </div>
@@ -85,12 +86,13 @@
                   id="password"
                   name="password"
                   placeholder="Ingresa tu contraseña"
+                  required
                   class="appearance-none border-2 border-gray-100 rounded-lg px-4 py-3 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-green-600 focus:shadow-lg"
                 />
               </div>
               <div id="button" class="flex flex-col w-full my-5">
-                <button
-                  type="button"
+                <input
+                  type="submit"
                   class="w-full py-4 bg-green-600 rounded-lg text-green-100"
                 >
                   <div class="flex flex-row items-center justify-center">
@@ -103,9 +105,10 @@
             </form>
             <!-- Fin del Form -->
             <div class="flex flex-col w-full my-5">
-                <%
-                   out.print(message);
-                %>
+                <div class='bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded'>
+                    <strong class='font-bold'>¡Error!</strong><br>
+                    <span class='ml-2'><% out.print(request.getParameter("error")); %></span>
+                </div>
             </div>
           </div>
         </div>
